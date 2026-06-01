@@ -48,3 +48,22 @@ function openAboutUs(evt, pageName) {
     document.getElementById(pageName).style.display = "block";
     evt.currentTarget.classList.add("w3-light-grey");
 }
+async function loginGoodPay() {
+    email = document.getElementById('login').value
+    password = document.getElementById('password').value
+
+    try {
+        const response = await fetch('./js/user.json')
+        const users = await response.json()
+
+        const userValided = users.find(u => u.email === email && u.password === password)
+
+        if (userValided) {
+            window.location.href = './dashboard.html'
+        } else {
+            alert('Erro ao processar, Seu e-mail ou Senha estão incorretos')
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
